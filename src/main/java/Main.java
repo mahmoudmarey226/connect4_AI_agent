@@ -1,7 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-//        long x = 511L;
-//        System.out.println(511L << (9*6));
-
+        long l = 0;
+        System.out.println(Long.toBinaryString(l));
     }
 }
