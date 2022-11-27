@@ -206,8 +206,8 @@ public class State {
         state = state & clearMask; //clearing other bits
         return state;
     }
-    //private
 
+    //private
     public static int getColHeight(char[][] grid, int col) {
 
         for (int row = ROWS-1 ; row >= 0; row--) {

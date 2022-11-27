@@ -2,6 +2,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
@@ -329,6 +330,149 @@ public class StateTest {
         Assertions.assertEquals(state1111112.state , state.state);
         turn = !turn;
 
+        State temp = new State(state.state);
+        Assertions.assertFalse(state.addMove(turn , 1));
+        Assertions.assertEquals(state.state , temp.state);
+
+
+    }
+
+    @Test
+    @DisplayName("Get all neighbours")
+    void getAllNeighboursTest(){
+        char[][] grid = {
+                {'o','o','o','o','o','R','o',},
+                {'R','o','o','o','o','Y','o',},
+                {'Y','R','o','o','o','Y','o',},
+                {'R','Y','o','Y','o','Y','o',},
+                {'Y','R','o','R','o','R','Y',},
+                {'R','R','o','Y','R','R','Y',}
+        };
+
+        State state = new State(State.toLong(grid));
+
+        char[][] nr1 = {
+                {'R','o','o','o','o','R','o',},
+                {'R','o','o','o','o','Y','o',},
+                {'Y','R','o','o','o','Y','o',},
+                {'R','Y','o','Y','o','Y','o',},
+                {'Y','R','o','R','o','R','Y',},
+                {'R','R','o','Y','R','R','Y',}
+        };
+        char[][] nr2 = {
+                {'o','o','o','o','o','R','o',},
+                {'R','R','o','o','o','Y','o',},
+                {'Y','R','o','o','o','Y','o',},
+                {'R','Y','o','Y','o','Y','o',},
+                {'Y','R','o','R','o','R','Y',},
+                {'R','R','o','Y','R','R','Y',}
+        };
+        char[][] nr3 = {
+                {'o','o','o','o','o','R','o',},
+                {'R','o','o','o','o','Y','o',},
+                {'Y','R','o','o','o','Y','o',},
+                {'R','Y','o','Y','o','Y','o',},
+                {'Y','R','o','R','o','R','Y',},
+                {'R','R','R','Y','R','R','Y',}
+        };
+        char[][] nr4 = {
+                {'o','o','o','o','o','R','o',},
+                {'R','o','o','o','o','Y','o',},
+                {'Y','R','o','R','o','Y','o',},
+                {'R','Y','o','Y','o','Y','o',},
+                {'Y','R','o','R','o','R','Y',},
+                {'R','R','o','Y','R','R','Y',}
+        };
+        char[][] nr5 = {
+                {'o','o','o','o','o','R','o',},
+                {'R','o','o','o','o','Y','o',},
+                {'Y','R','o','o','o','Y','o',},
+                {'R','Y','o','Y','o','Y','o',},
+                {'Y','R','o','R','R','R','Y',},
+                {'R','R','o','Y','R','R','Y',}
+        };
+        char[][] nr7 = {
+                {'o','o','o','o','o','R','o',},
+                {'R','o','o','o','o','Y','o',},
+                {'Y','R','o','o','o','Y','o',},
+                {'R','Y','o','Y','o','Y','R',},
+                {'Y','R','o','R','o','R','Y',},
+                {'R','R','o','Y','R','R','Y',}
+        };
+
+
+        char[][] ny1 = {
+                {'Y','o','o','o','o','R','o',},
+                {'R','o','o','o','o','Y','o',},
+                {'Y','R','o','o','o','Y','o',},
+                {'R','Y','o','Y','o','Y','o',},
+                {'Y','R','o','R','o','R','Y',},
+                {'R','R','o','Y','R','R','Y',}
+        };
+        char[][] ny2 = {
+                {'o','o','o','o','o','R','o',},
+                {'R','Y','o','o','o','Y','o',},
+                {'Y','R','o','o','o','Y','o',},
+                {'R','Y','o','Y','o','Y','o',},
+                {'Y','R','o','R','o','R','Y',},
+                {'R','R','o','Y','R','R','Y',}
+        };
+        char[][] ny3 = {
+                {'o','o','o','o','o','R','o',},
+                {'R','o','o','o','o','Y','o',},
+                {'Y','R','o','o','o','Y','o',},
+                {'R','Y','o','Y','o','Y','o',},
+                {'Y','R','o','R','o','R','Y',},
+                {'R','R','Y','Y','R','R','Y',}
+        };
+        char[][] ny4 = {
+                {'o','o','o','o','o','R','o',},
+                {'R','o','o','o','o','Y','o',},
+                {'Y','R','o','Y','o','Y','o',},
+                {'R','Y','o','Y','o','Y','o',},
+                {'Y','R','o','R','o','R','Y',},
+                {'R','R','o','Y','R','R','Y',}
+        };
+        char[][] ny5 = {
+                {'o','o','o','o','o','R','o',},
+                {'R','o','o','o','o','Y','o',},
+                {'Y','R','o','o','o','Y','o',},
+                {'R','Y','o','Y','o','Y','o',},
+                {'Y','R','o','R','Y','R','Y',},
+                {'R','R','o','Y','R','R','Y',}
+        };
+        char[][] ny7 = {
+                {'o','o','o','o','o','R','o',},
+                {'R','o','o','o','o','Y','o',},
+                {'Y','R','o','o','o','Y','o',},
+                {'R','Y','o','Y','o','Y','Y',},
+                {'Y','R','o','R','o','R','Y',},
+                {'R','R','o','Y','R','R','Y',}
+        };
+
+        ArrayList<char[][]> rNeighbours = new ArrayList<>();
+        rNeighbours.add(nr1);
+        rNeighbours.add(nr2);
+        rNeighbours.add(nr3);
+        rNeighbours.add(nr4);
+        rNeighbours.add(nr5);
+        rNeighbours.add(nr7);
+        ArrayList<char[][]> yNeighbours = new ArrayList<>();
+        yNeighbours.add(ny1);
+        yNeighbours.add(ny2);
+        yNeighbours.add(ny3);
+        yNeighbours.add(ny4);
+        yNeighbours.add(ny5);
+        yNeighbours.add(ny7);
+
+        ArrayList<State> exRneighbours = state.getAllNeighbours(true);
+        ArrayList<State> exYneighbours = state.getAllNeighbours(false);
+
+
+
+
+        Assertions.assertTrue(Arrays.deepEquals(exRneighbours.toArray() , rNeighbours.toArray()));
+        Assertions.assertTrue(Arrays.deepEquals(exYneighbours.toArray() , yNeighbours.toArray()));
 
     }
 
@@ -360,4 +504,6 @@ public class StateTest {
         Assertions.assertEquals(ex5 , State.getColHeight(grid , 5));
         Assertions.assertEquals(ex6 , State.getColHeight(grid , 6));
     }
+
+
 }
