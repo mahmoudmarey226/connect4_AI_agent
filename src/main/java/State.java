@@ -41,6 +41,11 @@ public class State {
         this.state = state;
     }
 
+    public State(char[][] grid){
+        long l = State.toLong(grid);
+        this.state = l;
+    }
+
     public void printGrid(){
         char[][] grid = toGrid();
         for (int i = 0; i < ROWS; i++) {
@@ -110,13 +115,15 @@ public class State {
     }
 
     // check if the game finished or not
-
     public boolean isFinish(){
         return state < 0;
     }
-    //returns arrayList of all possible neighbours
 
+    //returns arrayList of all possible neighbours
     public ArrayList<State> getAllNeighbours(boolean turn){
+        if (this.isFinish()){
+            return null;
+        }
         ArrayList<State> neighbours = new ArrayList<>();
         for (int col = 0; col < COLUMNS; col++) {
             long neighbor = addDisk(turn , col+1);
@@ -147,7 +154,7 @@ public class State {
         long isolatedState = isolateState(colNum);
         long highestFullHeight = isolatedState >> 6;// potential error , -+1
 
-        if (highestFullHeight == 7){
+        if (highestFullHeight == 6){
             return 0;
         }
         else{
@@ -186,7 +193,7 @@ public class State {
 
     //returns the col arrangement bits isolated and shifted
     //private
-    public long getColArrangementBits(long isolatedState, long highestFullHeight) {
+    private long getColArrangementBits(long isolatedState, long highestFullHeight) {
         long mask = 0b000111111L;
         isolatedState = isolatedState & mask;
 
@@ -198,7 +205,7 @@ public class State {
     //private
     //takes numbers from 0 to COLUMNS-1
     //0 is the most left col in grid and the most left 9bits in long
-    public long isolateState(int colNum) {
+    private long isolateState(int colNum) {
         long state = this.state & colsMasks[colNum];
         colNum = (COLUMNS-1)  - colNum;
         state = state >> (9*colNum);
@@ -208,7 +215,7 @@ public class State {
     }
 
     //private
-    public static int getColHeight(char[][] grid, int col) {
+    private static int getColHeight(char[][] grid, int col) {
 
         for (int row = ROWS-1 ; row >= 0; row--) {
             if (grid[row][col] == 'o'){
