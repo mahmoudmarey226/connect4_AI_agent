@@ -23,7 +23,7 @@ the arrangement bits are read from right to left (down to top in grid)
 
  */
 public class State {
-    long state;
+    private long state;
 
     private static final int ROWS = 6;
     private static final int COLUMNS = 7;
