@@ -482,8 +482,8 @@ public class StateTest {
         Assertions.assertTrue(Arrays.deepEquals(exRneighbours.toArray()  , rNeighbours.toArray()));
         Assertions.assertTrue(Arrays.deepEquals(exYneighbours.toArray()  , yNeighbours.toArray()));
 
-        Assertions.assertNull(fullState.getAllNeighbours(true));
-        Assertions.assertNull(fullState.getAllNeighbours(false));
+        Assertions.assertEquals(fullState.getAllNeighbours(true).size() , 0);
+        Assertions.assertEquals(fullState.getAllNeighbours(false).size() , 0);
 
 
 

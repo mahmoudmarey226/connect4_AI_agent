@@ -25,8 +25,8 @@ the arrangement bits are read from right to left (down to top in grid)
 public class State {
     public long state;
 
-    private static final int ROWS = 6;
-    private static final int COLUMNS = 7;
+    public static final int ROWS = 6;
+    public static final int COLUMNS = 7;
     // columns masks , 511 is nine ones
     private static final long col7Mask = 0b111111111L << (9*0);//55 zeros 9 ones 0 zeros
     private static final long col6Mask = 0b111111111L << (9*1);//46 zeros 9 ones 9 zeros
@@ -369,10 +369,10 @@ public class State {
 
     //returns arrayList of all possible neighbours
     public ArrayList<State> getAllNeighbours(boolean turn){
-        if (this.isFinish()){
-            return null;
-        }
         ArrayList<State> neighbours = new ArrayList<>();
+//        if (this.isFinish()){
+//            return neighbours;
+//        }
         for (int col = 0; col < COLUMNS; col++) {
             long neighbor = addDisk(turn , col+1);
             if (neighbor != 0L){
