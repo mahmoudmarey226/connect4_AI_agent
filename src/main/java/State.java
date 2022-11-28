@@ -23,7 +23,7 @@ the arrangement bits are read from right to left (down to top in grid)
 
  */
 public class State {
-    private long state;
+    public long state;
 
     private static final int ROWS = 6;
     private static final int COLUMNS = 7;
@@ -114,6 +114,254 @@ public class State {
         return result;
     }
 
+    //p is true when it's required to calculate R's score
+    public static int getScore(char[][] grid ,boolean p){
+        int score = 0;
+        char c = p ? 'R' : 'Y';
+
+        //horizontal loop
+        for (int row = 0; row < ROWS; row++) {
+            int count = 0;
+            for (int col = 0; col < COLUMNS; col++) {
+                if (grid[row][col] != c){
+                    count = 0;
+                }
+                else{
+                    count++;
+                    if (count == 4){
+                        score++;
+                        break;
+                    }
+                }
+            }
+        }
+
+        //vertical loop
+        for (int col = 0; col < COLUMNS; col++) {
+            int count = 0;
+            for (int row = 0; row < ROWS; row++) {
+                if (grid[row][col] != c){
+                    count = 0;
+                }
+                else{
+                    count++;
+                    if (count == 4){
+                        score++;
+                        break;
+                    }
+                }
+            }
+        }
+
+        //left to right diagonal loop
+        for (int row = 0; row < 3; row++) {
+            int count = 0;
+            for (int i = 0; i < ROWS-row; i++) {
+                if (grid[row+i][i] != c){
+                    count=0;
+                }
+                else{
+                    count++;
+                    if (count == 4){
+                        score++;
+                        break;
+                    }
+                }
+            }
+        }
+        for (int col = 1; col < 4; col++) {
+            int count = 0;
+            for (int i = 0;  col+i < COLUMNS && i < ROWS ; i++) {
+                if (grid[i][col+i] != c){
+                    count=0;
+                }
+                else{
+                    count++;
+                    if (count==4){
+                        score++;
+                        break;
+                    }
+                }
+            }
+        }
+
+        //right to left diagonal
+        for (int row = 0; row < 3; row++) {
+            int count = 0;
+            for (int i = COLUMNS-1; i > row ; i--) {
+                if (grid[row][(COLUMNS-1)-i] != c ){
+                    count=0;
+                }
+                else {
+                    count++;
+                    if (count==4){
+                        score++;
+                        break;
+                    }
+                }
+            }
+        }
+        for (int col = COLUMNS-2; col >= 3  ; col--) {
+            int count=0;
+            for (int i = 0; col-i >= 0 && i < ROWS; i++) {
+                if (grid[i][col-i] != c){
+                    count = 0;
+                }
+                else{
+                    count++;
+                    if (count == 4) {
+                        score++;
+                        break;
+                    }
+                }
+            }
+        }
+
+
+        return score;
+    }
+
+
+//        String[][] grid = {
+//                {"00","01","02","03","04","05","06",},
+//                {"10","11","12","13","14","15","16",},
+//                {"20","21","22","23","24","25","26",},
+//                {"30","31","32","33","34","35","36",},
+//                {"40","41","42","43","44","45","46",},
+//                {"50","51","52","53","54","55","56",}
+//        };
+//    public static int getScoreTest(String[][] grid ,boolean p){
+//        int score = 0;
+//        char c = p ? 'R' : 'Y';
+//
+//        //horizontal loop
+//        System.out.println("Horizontal loop:");
+//        for (int row = 0; row < ROWS; row++) {
+//            int count = 0;
+//            for (int col = 0; col < COLUMNS; col++) {
+//                System.out.print(grid[row][col] + ",");
+////                if (grid[row][col] != c){
+////                    count = 0;
+////                }
+////                else{
+////                    count++;
+////                    if (count == 4){
+////                        score++;
+//////                        break;
+////                    }
+////                }
+//            }
+//            System.out.println();
+//        }
+//        System.out.println();
+//
+//        //vertical loop
+//        System.out.println("Vertical loop:");
+//        for (int col = 0; col < COLUMNS; col++) {
+//            int count = 0;
+//            for (int row = 0; row < ROWS; row++) {
+//                System.out.print(grid[row][col] + ",");
+////                if (grid[row][col] != c){
+////                    count = 0;
+////                }
+////                else{
+////                    count++;
+////                    if (count == 4){
+////                        score++;
+//////                        break;
+////                    }
+////                }
+//            }
+//            System.out.println();
+//        }
+//        System.out.println();
+//
+//        //left to right diagonal loop
+//        System.out.println("Left to right part1");
+//        for (int row = 0; row < 3; row++) {
+//            int count = 0;
+//            for (int i = 0; i < ROWS-row; i++) {
+//                System.out.print(grid[row+i][i] + ",");
+////                if (grid[row+i][i] != c){
+////                    count=0;
+////                }
+////                else{
+////                    count++;
+////                    if (count == 4){
+////                        score++;
+//////                        break;
+////                    }
+////                }
+//            }
+//            System.out.println();
+//        }
+//
+//        System.out.println();
+//        System.out.println("Left to right part 2");
+//        for (int col = 1; col < 4; col++) {
+//            int count = 0;
+//            for (int i = 0;  col+i < COLUMNS && i < ROWS ; i++) {
+//                System.out.print(grid[i][col+i] + ",");
+////                if (grid[i][col+i] != c){
+////                    count=0;
+////                }
+////                else{
+////                    count++;
+////                    if (count==4){
+////                        score++;
+//////                        break;
+////                    }
+////                }
+//            }
+//            System.out.println();
+//        }
+//        System.out.println();
+//
+//        //right to left diagonal
+//        System.out.println("Right to left part 1");
+//        for (int row = 0; row < 3; row++) {
+//            int count = 0;
+//            for (int i = COLUMNS-1; i > row ; i--) {
+//                System.out.print(grid[row+(COLUMNS-1)-i][i] + ",");
+////                if (grid[row][(COLUMNS-1)-i] != c ){
+////                    count=0;
+////                }
+////                else {
+////                    count++;
+////                    if (count==4){
+////                        score++;
+//////                        break;
+////                    }
+////                }
+//            }
+//            System.out.println();
+//        }
+//        System.out.println();
+//        System.out.println("Right to left part2");
+//        for (int col = COLUMNS-2; col >= 3  ; col--) {
+//            int count=0;
+//            for (int i = 0; col-i >= 0 && i < ROWS; i++) {
+//                System.out.print(grid[i][col-i] + ",");
+////                if (grid[i][col-i] != c){
+////                    count = 0;
+////                }
+////                else{
+////                    count++;
+////                    if (count == 4) {
+////                        score++;
+//////                        break;
+////                    }
+////                }
+//            }
+//            System.out.println();
+//        }
+//
+//
+//        return score;
+//    }
+
+
+
     // check if the game finished or not
     public boolean isFinish(){
         return state < 0;
@@ -193,7 +441,7 @@ public class State {
 
     //returns the col arrangement bits isolated and shifted
     //private
-    private long getColArrangementBits(long isolatedState, long highestFullHeight) {
+    public long getColArrangementBits(long isolatedState, long highestFullHeight) {
         long mask = 0b000111111L;
         isolatedState = isolatedState & mask;
 
@@ -205,7 +453,7 @@ public class State {
     //private
     //takes numbers from 0 to COLUMNS-1
     //0 is the most left col in grid and the most left 9bits in long
-    private long isolateState(int colNum) {
+    public long isolateState(int colNum) {
         long state = this.state & colsMasks[colNum];
         colNum = (COLUMNS-1)  - colNum;
         state = state >> (9*colNum);
@@ -215,7 +463,7 @@ public class State {
     }
 
     //private
-    private static int getColHeight(char[][] grid, int col) {
+    public static int getColHeight(char[][] grid, int col) {
 
         for (int row = ROWS-1 ; row >= 0; row--) {
             if (grid[row][col] == 'o'){
