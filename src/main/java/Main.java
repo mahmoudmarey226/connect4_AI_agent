@@ -1,3 +1,5 @@
+import py4j.GatewayServer;
+
 public class Main {
     private static final int    levels = 5;
     private static final boolean initiator = true; // 'R' will begin first
@@ -11,16 +13,25 @@ public class Main {
        6-send the grid after PC's play to GUI
        7-if game not finished yet , go to 2 again ; else exit
      */
+    public static int[][] play(int x){
+        return play2(x);
+    }
     public static void main(String[] args) {
         //initialzation//
         //assuming the human always begins
+        Main app=new Main();
+        GatewayServer server = new GatewayServer(app);
+        server.start();
+    }
+
+    private static int[][] play2(int pos){
         State state = new State(0);//initial state
         boolean turn = initiator;
         Minimax minimax = new Minimax(levels);
-
-
         while (state.isFinish()){
             //receive data from GUI
+
+
             int columnToPlayIn = receiveData();
 
             //make changes and calculations
@@ -54,6 +65,7 @@ public class Main {
 
         }
     }
+
 
     private static void sendData(Data dataObject) {
         int[][] dataMatrix = new int[7][7];
