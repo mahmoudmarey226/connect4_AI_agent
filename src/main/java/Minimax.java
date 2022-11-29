@@ -14,7 +14,6 @@ public class Minimax {
             return minimize(state , levels , player);
         }
     }
-
     private State maximize(State state,int levels ,boolean player){
         //to check if K is 0 or if we reached a terminal node
         if(levels==0 || state.isFinish()){
