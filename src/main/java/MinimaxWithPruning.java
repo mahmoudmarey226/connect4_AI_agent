@@ -1,4 +1,4 @@
-public class minimaxWithPruning {
+public class MinimaxWithPruning {
     //the maximum number of levels that the algorithm...
     //generate before calculating the heuristic score for the states
     Heuristic h=new Heuristic();
@@ -32,10 +32,11 @@ public class minimaxWithPruning {
             if(child.getHeuristicScore()>maximum.getHeuristicScore()) {
                 maximum = new State(child);
                 alpha = maximum.getHeuristicScore();
+
             }
-//            if (beta <= alpha){
-//                break;
-//            }
+            if (beta <= alpha){
+                break;
+            }
         }
         //return the state with the maximum value found
         return maximum;
@@ -59,9 +60,9 @@ public class minimaxWithPruning {
                 minimum = new State(child);
                 beta = minimum.getHeuristicScore();
             }
-//            if (beta <= alpha){
-//                break;
-//            }
+            if (beta <= alpha){
+                break;
+            }
         }
         //return the state with the minimum value found
         return minimum;

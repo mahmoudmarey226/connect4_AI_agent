@@ -18,7 +18,7 @@ public class Main {
 //        State state = new State(0);//initial state
         boolean turn = initiator;
         Minimax minimax = new Minimax();
-        minimaxWithPruning minimaxWithPruning = new minimaxWithPruning();
+        MinimaxWithPruning mmWithPruning = new MinimaxWithPruning();
 
         //receive data from GUI
 //        int columnToPlayIn = receiveData();
@@ -30,11 +30,10 @@ public class Main {
         if (!availableMove){
             return dataToMatrix(0);
         }
-
         state = minimax.minimax(state, levels , !turn);
         System.out.println("Node expanded: "+minimax.nodeExpanded);
-//        state = minimaxWithPruning.minimaxWithPruning(state,levels,!turn,Double.MIN_VALUE,Double.MAX_VALUE);
-//        System.out.println("Node expanded: "+minimaxWithPruning.nodeExpanded);
+//        state = mmWithPruning.minimaxWithPruning(state,levels,!turn,-1*Double.MAX_VALUE,Double.MAX_VALUE);
+//        System.out.println("Node expanded: "+mmWithPruning.nodeExpanded);
 
         char[][] stateGrid = state.toGrid();
         Data dataObject = new Data(true , State.getScore(stateGrid , true) , State.getScore(stateGrid , false)

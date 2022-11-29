@@ -164,7 +164,7 @@ public class Heuristic implements HeuristicI{
             }
         return num;
     }
-    public float getHeuristicScore(char[][] state ) {
+    public int getHeuristicScore(char[][] state ) {
         int score = 0;
         score += (ConnectOf4(state, false)) * 10000;
         score += (ConnectOf3(state, false)) * 100;
@@ -172,6 +172,6 @@ public class Heuristic implements HeuristicI{
         score -= (ConnectOf4(state, true)) * 10000;
         score -= (ConnectOf3(state, true)) * 100;
         score -= (ConnectOf2(state, true)) * 10;
-        return (float) (score/1000.0);
+        return score;
     }
 }

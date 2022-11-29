@@ -24,7 +24,7 @@ the arrangement bits are read from right to left (down to top in grid)
  */
 public class State {
     public long state;
-    private float heuristicScore;
+    private int heuristicScore;
 
     public static final int ROWS = 6;
     public static final int COLUMNS = 7;
@@ -55,11 +55,11 @@ public class State {
     }
 
 
-    public void setHeuristicScore(float heuristicScore) {
+    public void setHeuristicScore(int heuristicScore) {
         this.heuristicScore = heuristicScore;
     }
 
-    public float getHeuristicScore(){
+    public int getHeuristicScore(){
         return heuristicScore;
     }
 
