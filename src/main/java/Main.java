@@ -31,10 +31,10 @@ public class Main {
             return dataToMatrix(0);
         }
 
-//        state = minimax.minimax(state, levels , !turn);
-//        System.out.println("Node expanded: "+minimax.nodeExpanded);
-        state = minimaxWithPruning.minimaxWithPruning(state,levels,!turn,Double.MIN_VALUE,Double.MAX_VALUE);
-        System.out.println("Node expanded: "+minimaxWithPruning.nodeExpanded);
+        state = minimax.minimax(state, levels , !turn);
+        System.out.println("Node expanded: "+minimax.nodeExpanded);
+//        state = minimaxWithPruning.minimaxWithPruning(state,levels,!turn,Double.MIN_VALUE,Double.MAX_VALUE);
+//        System.out.println("Node expanded: "+minimaxWithPruning.nodeExpanded);
 
         char[][] stateGrid = state.toGrid();
         Data dataObject = new Data(true , State.getScore(stateGrid , true) , State.getScore(stateGrid , false)

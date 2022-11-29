@@ -420,7 +420,15 @@ public class State {
 
     // check if the game finished or not
     public boolean isFinish(){
-        return state < 0;
+        char[][] grid = this.toGrid();
+
+        for (int col = 0; col < COLUMNS; col++) {
+            if (grid[0][col] == 'o'){
+                return false;
+            }
+        }
+
+        return true;
     }
 
     //returns arrayList of all possible neighbours
