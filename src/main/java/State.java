@@ -24,6 +24,7 @@ the arrangement bits are read from right to left (down to top in grid)
  */
 public class State {
     public long state;
+    private float heuristicScore;
 
     public static final int ROWS = 6;
     public static final int COLUMNS = 7;
@@ -39,12 +40,29 @@ public class State {
 
     public State(long state){
         this.state = state;
+        this.heuristicScore = 0;
+    }
+
+    public State(State state){
+        this.state = state.state;
+        this.heuristicScore = state.getHeuristicScore();
     }
 
     public State(char[][] grid){
         long l = State.toLong(grid);
         this.state = l;
+        this.heuristicScore = 0;
     }
+
+
+    public void setHeuristicScore(float heuristicScore) {
+        this.heuristicScore = heuristicScore;
+    }
+
+    public float getHeuristicScore(){
+        return heuristicScore;
+    }
+
 
     public void printGrid(){
         char[][] grid = toGrid();
@@ -219,6 +237,22 @@ public class State {
 
 
         return score;
+    }
+
+    public void printTree(int levels){
+        ArrayList<State> states = new ArrayList<>();
+        states.add(new State(this.state));
+        recursivePrintTree(states ,levels);
+
+    }
+
+    private void recursivePrintTree(ArrayList<State> states, int levels) {
+        if (levels == 0) {
+            return;
+        }
+        for (State state : states) {
+            state.printGrid();
+        }
     }
 
 
