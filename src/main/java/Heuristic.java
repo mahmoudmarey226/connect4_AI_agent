@@ -32,7 +32,6 @@ public class Heuristic implements HeuristicI{
                     num++;
         return num;
     }
-
     private int ConnectOf3(char[][] board, boolean flag) {
         char turn;
         int num = 0;
