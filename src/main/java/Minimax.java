@@ -25,7 +25,7 @@ public class Minimax {
         //to check if K is 0 or if we reached a terminal node
         if(levels==0 || state.isFinish()){
             //call the heuristic to set the utility of the state then return it
-            state.setHeuristicScore(h.getHeuristicScore(state.toGrid(),player));
+            state.setHeuristicScore(h.getHeuristicScore(state.toGrid()));
             return state;
         }
         //a state to put the maximum value found
@@ -47,7 +47,7 @@ public class Minimax {
         //to check if levels is 0 or if we reached a terminal node
         if(levels==0 || state.isFinish()){
             //call the heuristic to set the utility of the state then return it
-            state.setHeuristicScore(h.getHeuristicScore(state.toGrid(),player));
+            state.setHeuristicScore(h.getHeuristicScore(state.toGrid()));
             return state;
         }
         //a state to put the minimum value found

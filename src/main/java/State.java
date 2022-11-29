@@ -131,129 +131,151 @@ public class State {
 
         return result;
     }
+    
+    public static int getScore(char[][] board, boolean flag) {
+        int num = 0;
+        char turn;
+        if (flag)
+            turn = 'R';
+        else
+            turn = 'Y';
+        // horizontal
+        for (int i = 0; i < ROWS; i++)
+            for (int j = 0; j < COLUMNS - 3; j++)
+                if (board[i][j] == turn && board[i][j + 1] == turn && board[i][j + 2] == turn && board[i][j + 3] == turn)
+                    num++;
+        // vertical
+        for (int i = 0; i < ROWS - 3; i++)
+            for (int j = 0; j < COLUMNS; j++)
+                if (board[i][j] == turn && board[i + 1][j] == turn && board[i + 2][j] == turn && board[i + 3][j] == turn)
+                    num++;
+        // negative diagonal
+        for (int i = 3; i < ROWS; i++)
+            for (int j = 0; j < COLUMNS - 3; j++)
+                if (board[i][j] == turn && board[i - 1][j + 1] == turn && board[i - 2][j + 2] == turn && board[i - 3][j + 3] == turn)
+                    num++;
+        // positive diagonal
+        for (int i = 0; i < ROWS - 3; i++)
+            for (int j = 0; j < COLUMNS - 3; j++)
+                if (board[i][j] == turn && board[i + 1][j + 1] == turn && board[i + 2][j + 2] == turn && board[i + 3][j + 3] == turn)
+                    num++;
+        return num;
+    }
 
     //p is true when it's required to calculate R's score
-    public static int getScore(char[][] grid ,boolean p){
-        int score = 0;
-        char c = p ? 'R' : 'Y';
+//    public static int getScore(char[][] grid ,boolean p){
+////  |Y|Y|Y|Y|o|o|o|
+////  |R|Y|Y|Y|R|o|o|
+////  |Y|Y|Y|R|R|R|o|
+////  |Y|Y|R|Y|R|R|o|
+////  |Y|Y|R|R|R|R|o|
+////  |Y|Y|R|R|R|R|R|
+//        int score = 0;
+//        char c = p ? 'R' : 'Y';
+//
+//        //horizontal loop
+//        for (int row = 0; row < ROWS; row++) {
+//            int count = 0;
+//            for (int col = 0; col < COLUMNS; col++) {
+//                if (grid[row][col] != c){
+//                    count = 0;
+//                }
+//                else{
+//                    count++;
+//                    if (count == 4){
+//                        score++;
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//
+//        //vertical loop
+//        for (int col = 0; col < COLUMNS; col++) {
+//            int count = 0;
+//            for (int row = 0; row < ROWS; row++) {
+//                if (grid[row][col] != c){
+//                    count = 0;
+//                }
+//                else{
+//                    count++;
+//                    if (count == 4){
+//                        score++;
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//
+//        //left to right diagonal loop
+//        for (int row = 0; row < 3; row++) {
+//            int count = 0;
+//            for (int i = 0; i < ROWS-row; i++) {
+//                if (grid[row+i][i] != c){
+//                    count=0;
+//                }
+//                else{
+//                    count++;
+//                    if (count == 4){
+//                        score++;
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//        for (int col = 1; col < 4; col++) {
+//            int count = 0;
+//            for (int i = 0;  col+i < COLUMNS && i < ROWS ; i++) {
+//                if (grid[i][col+i] != c){
+//                    count=0;
+//                }
+//                else{
+//                    count++;
+//                    if (count==4){
+//                        score++;
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//
+//        //right to left diagonal
+//        for (int row = 0; row < 3; row++) {
+//            int count = 0;
+//            for (int i = COLUMNS-1; i > row ; i--) {
+//                if (grid[row][(COLUMNS-1)-i] != c ){
+//                    count=0;
+//                }
+//                else {
+//                    count++;
+//                    if (count==4){
+//                        score++;
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//        for (int col = COLUMNS-2; col >= 3  ; col--) {
+//            int count=0;
+//            for (int i = 0; col-i >= 0 && i < ROWS; i++) {
+//                if (grid[i][col-i] != c){
+//                    count = 0;
+//                }
+//                else{
+//                    count++;
+//                    if (count == 4) {
+//                        score++;
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//
+//
+//        return score;
+//    }
 
-        //horizontal loop
-        for (int row = 0; row < ROWS; row++) {
-            int count = 0;
-            for (int col = 0; col < COLUMNS; col++) {
-                if (grid[row][col] != c){
-                    count = 0;
-                }
-                else{
-                    count++;
-                    if (count == 4){
-                        score++;
-                        break;
-                    }
-                }
-            }
-        }
 
-        //vertical loop
-        for (int col = 0; col < COLUMNS; col++) {
-            int count = 0;
-            for (int row = 0; row < ROWS; row++) {
-                if (grid[row][col] != c){
-                    count = 0;
-                }
-                else{
-                    count++;
-                    if (count == 4){
-                        score++;
-                        break;
-                    }
-                }
-            }
-        }
-
-        //left to right diagonal loop
-        for (int row = 0; row < 3; row++) {
-            int count = 0;
-            for (int i = 0; i < ROWS-row; i++) {
-                if (grid[row+i][i] != c){
-                    count=0;
-                }
-                else{
-                    count++;
-                    if (count == 4){
-                        score++;
-                        break;
-                    }
-                }
-            }
-        }
-        for (int col = 1; col < 4; col++) {
-            int count = 0;
-            for (int i = 0;  col+i < COLUMNS && i < ROWS ; i++) {
-                if (grid[i][col+i] != c){
-                    count=0;
-                }
-                else{
-                    count++;
-                    if (count==4){
-                        score++;
-                        break;
-                    }
-                }
-            }
-        }
-
-        //right to left diagonal
-        for (int row = 0; row < 3; row++) {
-            int count = 0;
-            for (int i = COLUMNS-1; i > row ; i--) {
-                if (grid[row][(COLUMNS-1)-i] != c ){
-                    count=0;
-                }
-                else {
-                    count++;
-                    if (count==4){
-                        score++;
-                        break;
-                    }
-                }
-            }
-        }
-        for (int col = COLUMNS-2; col >= 3  ; col--) {
-            int count=0;
-            for (int i = 0; col-i >= 0 && i < ROWS; i++) {
-                if (grid[i][col-i] != c){
-                    count = 0;
-                }
-                else{
-                    count++;
-                    if (count == 4) {
-                        score++;
-                        break;
-                    }
-                }
-            }
-        }
-
-
-        return score;
-    }
-
-    public void printTree(int levels){
-        ArrayList<State> states = new ArrayList<>();
-        states.add(new State(this.state));
-        recursivePrintTree(states ,levels);
-
-    }
-
-    private void recursivePrintTree(ArrayList<State> states, int levels) {
-        if (levels == 0) {
-            return;
-        }
-        for (State state : states) {
-            state.printGrid();
-        }
-    }
 
 
 //        String[][] grid = {
