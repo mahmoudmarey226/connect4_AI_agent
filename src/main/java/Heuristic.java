@@ -165,6 +165,7 @@ public class Heuristic implements HeuristicI{
             }
         return num;
     }
+
     public float getHeuristicScore(char[][] state ) {
         int score = 0;
         score += (ConnectOf4(state, true)) * 1000;
