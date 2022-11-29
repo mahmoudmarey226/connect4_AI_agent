@@ -9,7 +9,19 @@ public class Minimax {
 
     //return the number of the column from 1 to 7 that the agent should play in
     //turn is true when it's R's turn , else it's Y's turn
-    public State minimax(State state,int levels ,boolean player){
+
+    public State minimax(State state , int levels , boolean player){
+        if (player){
+            return maximize(state , levels , player);
+        }
+        else{
+            return minimize(state , levels , player);
+        }
+    }
+
+
+
+    private State maximize(State state,int levels ,boolean player){
         //to check if K is 0 or if we reached a terminal node
         if(levels==0 || state.isFinish()){
             //call the heuristic to set the utility of the state then return it
@@ -31,7 +43,7 @@ public class Minimax {
         return maximum;
     }
 
-    public State minimize(State state, int levels , boolean player){
+    private State minimize(State state, int levels , boolean player){
         //to check if levels is 0 or if we reached a terminal node
         if(levels==0 || state.isFinish()){
             //call the heuristic to set the utility of the state then return it
@@ -43,7 +55,7 @@ public class Minimax {
         minimum.setHeuristicScore(Integer.MAX_VALUE);
         //loop over the children of the state to update the value of minimum state
         for(State child : state.getAllNeighbours(player)){
-            child.setHeuristicScore(minimax(child,levels-1,false).getHeuristicScore());
+            child.setHeuristicScore(maximize(child,levels-1,false).getHeuristicScore());
             if(child.getHeuristicScore()<minimum.getHeuristicScore()) {
                 minimum = new State(child);
             }

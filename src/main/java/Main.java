@@ -17,7 +17,7 @@ public class Main {
     public static int[][] play(int columnToPlayIn){
 //        State state = new State(0);//initial state
         boolean turn = initiator;
-        Minimax minimax = new Minimax(levels);
+        Minimax minimax = new Minimax();
 
         //receive data from GUI
 //        int columnToPlayIn = receiveData();
@@ -42,8 +42,9 @@ public class Main {
 
         //perform the algorithm to determine PC's move
 
-        columnToPlayIn = minimax.minimax(state , !turn);
-        state.addMove(!turn, columnToPlayIn);
+//        columnToPlayIn = minimax.minimax(state , !turn);
+//        state.addMove(!turn, columnToPlayIn);
+        state = minimax.minimax(state, levels , !turn);
 
         char[][] stateGrid = state.toGrid();
         Data dataObject = new Data(true , State.getScore(stateGrid , true) , State.getScore(stateGrid , false)
