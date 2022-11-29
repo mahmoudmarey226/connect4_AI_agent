@@ -2,6 +2,7 @@ public class Minimax {
     //the maximum number of levels that the algorithm...
     //generate before calculating the heuristic score for the states
     Heuristic h=new Heuristic();
+    public int nodeExpanded=0;
 
     //return the number of the column from 1 to 7 that the agent should play in
     //turn is true when it's R's turn , else it's Y's turn
@@ -15,6 +16,7 @@ public class Minimax {
         }
     }
     private State maximize(State state,int levels ,boolean player){
+        nodeExpanded++;
         //to check if K is 0 or if we reached a terminal node
         if(levels==0 || state.isFinish()){
             //call the heuristic to set the utility of the state then return it
@@ -32,11 +34,11 @@ public class Minimax {
             }
         }
         //return the state with the maximum value found
-        //g.printGame(maximum.getChildren().get(5).grid);
         return maximum;
     }
 
     private State minimize(State state, int levels , boolean player){
+        nodeExpanded++;
         //to check if levels is 0 or if we reached a terminal node
         if(levels==0 || state.isFinish()){
             //call the heuristic to set the utility of the state then return it

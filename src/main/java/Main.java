@@ -18,6 +18,7 @@ public class Main {
 //        State state = new State(0);//initial state
         boolean turn = initiator;
         Minimax minimax = new Minimax();
+        minimaxWithPruning minimaxWithPruning = new minimaxWithPruning();
 
         //receive data from GUI
 //        int columnToPlayIn = receiveData();
@@ -30,21 +31,10 @@ public class Main {
             return dataToMatrix(0);
         }
 
-        //this will be uncommented if we send data for the human move
-        //and then perform the algorithm and make PC's move then send data
-        //but what actually happens is that we take the human move and
-        //then perform the algorithm make PC's move and then send data only once
-
-//            char[][] stateGrid = state.toGrid();
-//            Data dataObject = new Data(availableMove , State.getScore(stateGrid , true) , State.getScore(stateGrid , false)
-//                    , state.isFinish() , stateGrid);
-//            sendData(dataObject);
-
-        //perform the algorithm to determine PC's move
-
-//        columnToPlayIn = minimax.minimax(state , !turn);
-//        state.addMove(!turn, columnToPlayIn);
-        state = minimax.minimax(state, levels , !turn);
+//        state = minimax.minimax(state, levels , !turn);
+//        System.out.println("Node expanded: "+minimax.nodeExpanded);
+        state = minimaxWithPruning.minimaxWithPruning(state,levels,!turn,Double.MIN_VALUE,Double.MAX_VALUE);
+        System.out.println("Node expanded: "+minimaxWithPruning.nodeExpanded);
 
         char[][] stateGrid = state.toGrid();
         Data dataObject = new Data(true , State.getScore(stateGrid , true) , State.getScore(stateGrid , false)
