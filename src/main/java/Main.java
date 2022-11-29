@@ -49,7 +49,8 @@ public class Main {
         char[][] stateGrid = state.toGrid();
         Data dataObject = new Data(true , State.getScore(stateGrid , true) , State.getScore(stateGrid , false)
                 , state.isFinish() , stateGrid);
-
+        state.printGrid();
+        System.out.println("**********************************");
         return dataToMatrix(dataObject);
 
 
