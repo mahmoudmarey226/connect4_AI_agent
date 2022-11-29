@@ -1,3 +1,3 @@
 public interface HeuristicI {
-    public float getHeuristicScore(long state);
+    public float getHeuristicScore(char[][] state , boolean turn);
 }
